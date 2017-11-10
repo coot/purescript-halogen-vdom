@@ -12,7 +12,7 @@ module Halogen.VDom.Types
 
 import Prelude
 import Data.Bifunctor (class Bifunctor, bimap)
-import Data.Generic (class Generic)
+import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe)
 import Data.Newtype (class Newtype)
 import Data.Tuple (Tuple)
@@ -84,7 +84,7 @@ data ElemSpec a = ElemSpec (Maybe Namespace) ElemName a
 
 derive instance eqElemSpec ∷ Eq a ⇒ Eq (ElemSpec a)
 derive instance ordElemSpec ∷ Ord a ⇒ Ord (ElemSpec a)
-derive instance genericElemSpec ∷ Generic a ⇒ Generic (ElemSpec a)
+derive instance genericElemSpec ∷ Generic a r ⇒ Generic (ElemSpec a) _
 
 instance functorElemSpec ∷ Functor ElemSpec where
   map f (ElemSpec ns name a) = ElemSpec ns name (f a)
@@ -94,11 +94,11 @@ newtype ElemName = ElemName String
 derive instance newtypeElemName ∷ Newtype ElemName _
 derive newtype instance eqElemName ∷ Eq ElemName
 derive newtype instance ordElemName ∷ Ord ElemName
-derive instance genericElemName ∷ Generic ElemName
+derive instance genericElemName ∷ Generic ElemName _
 
 newtype Namespace = Namespace String
 
 derive instance newtypeNamespace ∷ Newtype Namespace _
 derive newtype instance eqNamespace ∷ Eq Namespace
 derive newtype instance ordNamespace ∷ Ord Namespace
-derive instance genericNamespace ∷ Generic Namespace
+derive instance genericNamespace ∷ Generic Namespace _
